@@ -1,0 +1,14 @@
+{
+    "name":{
+        "corto":"ejemplo",
+        "largo":"ejemplo largo de nombre de card",
+        "vacio":"",
+        "cortoMod":"ejemplo modificado",
+        "largoMod":"ejemplo largo modificado para card"
+    },
+    "desc":{
+        "corto":"ejemplo desc",
+        "largo":"ejemplo largo de descripcion para card"
+    }
+   
+}
