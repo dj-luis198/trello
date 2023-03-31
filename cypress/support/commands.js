@@ -28,7 +28,7 @@ const eQA = require('./eQA');
 
 Cypress.Commands.add('getBoardData', (idBoard,point) => {
 cy.request({
-    url: `${eQA.BASEURL}/${eQA.BOARDS}/${idBoard}/${point}`,
+    url: `/${eQA.BOARDS}/${idBoard}/${point}`,
     method: 'GET',
     qs: {
       key: eQA.KEY,
@@ -39,7 +39,7 @@ cy.request({
 
 Cypress.Commands.add('addCard', (idList, name) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}`,
+        url: `/${eQA.CARDS}`,
         method: 'POST',
         body: {
             key: eQA.KEY,
@@ -53,7 +53,7 @@ Cypress.Commands.add('addCard', (idList, name) => {
 Cypress.Commands.add('getCard', (idCard) => {
     cy.request({
         method: 'GET',
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         failOnStatusCode: false,
         qs: {
             key: eQA.KEY,
@@ -64,7 +64,7 @@ Cypress.Commands.add('getCard', (idCard) => {
 
 Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
             key: eQA.KEY,
@@ -79,7 +79,7 @@ Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
 
 Cypress.Commands.add('putPosCard', (idCard, pos) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
             key: eQA.KEY,
@@ -91,7 +91,7 @@ Cypress.Commands.add('putPosCard', (idCard, pos) => {
 
 Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
             key: eQA.KEY,
@@ -105,7 +105,7 @@ Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
 Cypress.Commands.add('getList', (idList) => {
     cy.request({
         method: 'GET',
-        url: `${eQA.BASEURL}/${eQA.LISTS}/${idList}/${eQA.CARDS}`,
+        url: `/${eQA.LISTS}/${idList}/${eQA.CARDS}`,
         qs: {
             key: eQA.KEY,
             token: eQA.TOKEN,
@@ -115,7 +115,7 @@ Cypress.Commands.add('getList', (idList) => {
 
 Cypress.Commands.add('closedCard', (idCard, boolean) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
             key: eQA.KEY,
@@ -127,7 +127,7 @@ Cypress.Commands.add('closedCard', (idCard, boolean) => {
 
 Cypress.Commands.add('deleteCard', (idCard) => {
     cy.request({
-        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
+        url: `/${eQA.CARDS}/${idCard}`,
         method: 'DELETE',
         body: {
             key: eQA.KEY,
