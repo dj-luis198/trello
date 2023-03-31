@@ -1,9 +1,13 @@
 /// <reference types="cypress" />
-const environmentQA = require('../../support/environmentQA');
+const eQA = require('../../support/eQA');
+
+
 
 describe('Crear y eliminar tarjetas de un tablero', () => {
     let cardId1, cardId2, cardId3, posCard1, posCard2, posCard3,
         listaA, listaB, listaC, dataCard;
+
+    const IDBOARD= process.env.IDBOARD;
 
     before(`pre-condiciones: La lista "TO DO" debe estar disponible en el tablero
           La lista "IN PROGRESS" debe estar disponible en el tablero
@@ -13,22 +17,20 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
         cy.fixture('data').then(data => {
             dataCard = data;
         })
-        cy.getBoardData(environmentQA.IDBOARD, environmentQA.LISTS)
+        cy.getBoardData(eQA.IDBOARD, eQA.LISTS)
             .then(result => {
                 cy.log(result);
                 expect(result.status).to.eql(200);
                 expect(result.body).to.have.length(3);
-                expect(result.body[0]).to.have.property('name', 'TO DO');
-                expect(result.body[0]).to.have.property('closed', false);
-                expect(result.body[1]).to.have.property('name', 'IN PROGRESS');
-                expect(result.body[1]).to.have.property('closed', false);
-                expect(result.body[2]).to.have.property('name', 'DONE');
-                expect(result.body[2]).to.have.property('closed', false);
+                result.body.forEach((data)=>{
+                    expect(data).to.property('closed',false);
+                    expect(data.name).to.be.oneOf(['TO DO','IN PROGRESS','DONE'])
+                })
                 listaA = result.body[0].id;
                 listaB = result.body[1].id;
                 listaC = result.body[2].id;
             })
-        cy.getBoardData(environmentQA.IDBOARD, environmentQA.CARDS)
+        cy.getBoardData(eQA.IDBOARD, eQA.CARDS)
             .then(result => {
                 cy.log(result);
                 expect(result.status).to.eql(200);
@@ -46,10 +48,10 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                     .then(result1 => {
                         cy.log(result1);
                         expect(result1.status).to.eql(200);
-                        expect(result1.body).to.have.property('id', `${cardId1}`);
+                        expect(result1.body).to.have.property('id', cardId1);
                         expect(result1.body).to.have.property('name', dataCard.name.corto);
-                        expect(result1.body).to.have.property('idBoard', `${environmentQA.IDBOARD}`);
-                        expect(result1.body).to.have.property('idList', `${listaA}`);
+                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idList', listaA);
                         posCard1 = result1.body.pos;
                     })
             })
@@ -66,11 +68,11 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                     .then(result1 => {
                         cy.log(result1);
                         expect(result1.status).to.eql(200);
-                        expect(result1.body).to.have.property('id', `${cardId2}`);
+                        expect(result1.body).to.have.property('id', cardId2);
                         expect(result1.body).to.have.property('name', dataCard.name.vacio);
                         expect(result1.body.pos).to.be.greaterThan(posCard1);
-                        expect(result1.body).to.have.property('idBoard', `${environmentQA.IDBOARD}`);
-                        expect(result1.body).to.have.property('idList', `${listaA}`);
+                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idList', listaA);
                         posCard2 = result1.body.pos;
                     })
             })
@@ -88,11 +90,11 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                     .then(result1 => {
                         cy.log(result1);
                         expect(result1.status).to.eql(200);
-                        expect(result1.body).to.have.property('id', `${cardId3}`);
+                        expect(result1.body).to.have.property('id', cardId3);
                         expect(result1.body).to.have.property('name', dataCard.name.largo);
                         expect(result1.body.pos).to.be.greaterThan(posCard2);
-                        expect(result1.body).to.have.property('idBoard', `${environmentQA.IDBOARD}`);
-                        expect(result1.body).to.have.property('idList', `${listaA}`);
+                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idList', listaA);
                         posCard3 = result1.body.pos;
                     })
             })

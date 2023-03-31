@@ -1,4 +1,4 @@
-const environmentQA = require('../support/environmentQA');
+const eQA = require('./eQA');
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -28,22 +28,22 @@ const environmentQA = require('../support/environmentQA');
 
 Cypress.Commands.add('getBoardData', (idBoard,point) => {
 cy.request({
-    url: `${environmentQA.PBOARD}/${idBoard}/${point}`,
+    url: `${eQA.BASEURL}/${eQA.BOARDS}/${idBoard}/${point}`,
     method: 'GET',
     qs: {
-      key: `${environmentQA.KEY}`,
-      token: `${environmentQA.TOKEN}`,
+      key: eQA.KEY,
+      token: eQA.TOKEN,
     }
   })
 })
 
 Cypress.Commands.add('addCard', (idList, name) => {
     cy.request({
-        url: `${environmentQA.PCARDS}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}`,
         method: 'POST',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
             idList: idList,
             name: name,
         },
@@ -53,22 +53,22 @@ Cypress.Commands.add('addCard', (idList, name) => {
 Cypress.Commands.add('getCard', (idCard) => {
     cy.request({
         method: 'GET',
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         failOnStatusCode: false,
         qs: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
         },
     })
 })
 
 Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
     cy.request({
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
             name: name,
             desc: desc,
             idMembers: idMembers.toString(),
@@ -79,11 +79,11 @@ Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
 
 Cypress.Commands.add('putPosCard', (idCard, pos) => {
     cy.request({
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
             pos: pos,
         }
     })
@@ -91,11 +91,11 @@ Cypress.Commands.add('putPosCard', (idCard, pos) => {
 
 Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
     cy.request({
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
             idList: idList,
             pos: pos,
         }
@@ -105,21 +105,21 @@ Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
 Cypress.Commands.add('getList', (idList) => {
     cy.request({
         method: 'GET',
-        url: `${environmentQA.PLISTS}/${idList}/${environmentQA.CARDS}`,
+        url: `${eQA.BASEURL}/${eQA.LISTS}/${idList}/${eQA.CARDS}`,
         qs: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
         },
     })
 })
 
 Cypress.Commands.add('closedCard', (idCard, boolean) => {
     cy.request({
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         method: 'PUT',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
             closed: boolean,
         },
     })
@@ -127,11 +127,11 @@ Cypress.Commands.add('closedCard', (idCard, boolean) => {
 
 Cypress.Commands.add('deleteCard', (idCard) => {
     cy.request({
-        url: `${environmentQA.PCARDS}/${idCard}`,
+        url: `${eQA.BASEURL}/${eQA.CARDS}/${idCard}`,
         method: 'DELETE',
         body: {
-            key: `${environmentQA.KEY}`,
-            token: `${environmentQA.TOKEN}`,
+            key: eQA.KEY,
+            token: eQA.TOKEN,
         },
     })
 })
