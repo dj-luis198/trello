@@ -1,5 +1,6 @@
 const eQA = require('./eQA');
 
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -28,22 +29,22 @@ const eQA = require('./eQA');
 
 Cypress.Commands.add('getBoardData', (idBoard,point) => {
 cy.request({
-    url: `/${eQA.BOARDS}/${idBoard}/${point}`,
+    url: `/${Cypress.env('boards')}/${idBoard}/${point}`,
     method: 'GET',
     qs: {
-      key: eQA.KEY,
-      token: eQA.TOKEN,
+      key: Cypress.env('key'),
+      token: Cypress.env('token'),
     }
   })
 })
 
 Cypress.Commands.add('addCard', (idList, name) => {
     cy.request({
-        url: `/${eQA.CARDS}`,
+        url: `/${Cypress.env('cards')}`,
         method: 'POST',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
             idList: idList,
             name: name,
         },
@@ -53,22 +54,22 @@ Cypress.Commands.add('addCard', (idList, name) => {
 Cypress.Commands.add('getCard', (idCard) => {
     cy.request({
         method: 'GET',
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         failOnStatusCode: false,
         qs: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
         },
     })
 })
 
 Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
     cy.request({
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         method: 'PUT',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
             name: name,
             desc: desc,
             idMembers: idMembers.toString(),
@@ -79,11 +80,11 @@ Cypress.Commands.add('putCard', (idCard, name, desc, idMembers, idLabels) => {
 
 Cypress.Commands.add('putPosCard', (idCard, pos) => {
     cy.request({
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         method: 'PUT',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
             pos: pos,
         }
     })
@@ -91,11 +92,11 @@ Cypress.Commands.add('putPosCard', (idCard, pos) => {
 
 Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
     cy.request({
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         method: 'PUT',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
             idList: idList,
             pos: pos,
         }
@@ -105,21 +106,21 @@ Cypress.Commands.add('putListCard', (idCard, idList, pos) => {
 Cypress.Commands.add('getList', (idList) => {
     cy.request({
         method: 'GET',
-        url: `/${eQA.LISTS}/${idList}/${eQA.CARDS}`,
+        url: `/${Cypress.env('lists')}/${idList}/${Cypress.env('cards')}`,
         qs: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
         },
     })
 })
 
 Cypress.Commands.add('closedCard', (idCard, boolean) => {
     cy.request({
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         method: 'PUT',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
             closed: boolean,
         },
     })
@@ -127,11 +128,11 @@ Cypress.Commands.add('closedCard', (idCard, boolean) => {
 
 Cypress.Commands.add('deleteCard', (idCard) => {
     cy.request({
-        url: `/${eQA.CARDS}/${idCard}`,
+        url: `/${Cypress.env('cards')}/${idCard}`,
         method: 'DELETE',
         body: {
-            key: eQA.KEY,
-            token: eQA.TOKEN,
+            key: Cypress.env('key'),
+            token: Cypress.env('token'),
         },
     })
 })
