@@ -1,5 +1,4 @@
 /// <reference types="cypress" />
-const eQA = require('../../support/eQA');
 
 describe('Modificar, mover y archivar tarjetas de un tablero', () => {
     let cardId1, cardId2, cardId3, posCard1, posCard2, posCard3, listaA, listaB, listaC, idMember1, idMember2, label1, label2, dataCard;
@@ -13,7 +12,7 @@ describe('Modificar, mover y archivar tarjetas de un tablero', () => {
         cy.fixture('data').then(data => {
             dataCard = data;
 
-            cy.getBoardData(eQA.IDBOARD, eQA.LISTS)
+            cy.getBoardData(Cypress.env('idboard'), Cypress.env('lists'))
                 .then(result => {
                     cy.log(result);
                     expect(result.status).to.eql(200);
@@ -26,13 +25,13 @@ describe('Modificar, mover y archivar tarjetas de un tablero', () => {
                     listaB = result.body[1].id;
                     listaC = result.body[2].id;
 
-                    cy.getBoardData(eQA.IDBOARD, eQA.CARDS)
+                    cy.getBoardData(Cypress.env('idboard'), Cypress.env('cards'))
                         .then(result => {
                             cy.log(result);
                             expect(result.status).to.eql(200);
                             expect(result.body).to.be.empty;
                         })
-                    cy.getBoardData(eQA.IDBOARD, eQA.MEMBERSHIPS)
+                    cy.getBoardData(Cypress.env('idboard'), Cypress.env('memberships'))
                         .then(result => {
                             cy.log(result);
                             expect(result.status).to.eql(200);
@@ -40,7 +39,7 @@ describe('Modificar, mover y archivar tarjetas de un tablero', () => {
                             idMember1 = result.body[1].idMember;
                             idMember2 = result.body[2].idMember;
                         })
-                    cy.getBoardData(eQA.IDBOARD, eQA.LABELS)
+                    cy.getBoardData(Cypress.env('idboard'), Cypress.env('labels'))
                         .then(result => {
                             cy.log(result);
                             expect(result.status).to.eql(200);

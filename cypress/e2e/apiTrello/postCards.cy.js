@@ -1,13 +1,8 @@
 /// <reference types="cypress" />
-const eQA = require('../../support/eQA');
-
-
 
 describe('Crear y eliminar tarjetas de un tablero', () => {
     let cardId1, cardId2, cardId3, posCard1, posCard2, posCard3,
         listaA, listaB, listaC, dataCard;
-
-    const IDBOARD= process.env.IDBOARD;
 
     before(`pre-condiciones: La lista "TO DO" debe estar disponible en el tablero
           La lista "IN PROGRESS" debe estar disponible en el tablero
@@ -17,7 +12,7 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
         cy.fixture('data').then(data => {
             dataCard = data;
         })
-        cy.getBoardData(eQA.IDBOARD, eQA.LISTS)
+        cy.getBoardData(Cypress.env('idboard'), Cypress.env('lists'))
             .then(result => {
                 cy.log(result);
                 expect(result.status).to.eql(200);
@@ -30,7 +25,7 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                 listaB = result.body[1].id;
                 listaC = result.body[2].id;
             })
-        cy.getBoardData(eQA.IDBOARD, eQA.CARDS)
+        cy.getBoardData(Cypress.env('idboard'), Cypress.env('cards'))
             .then(result => {
                 cy.log(result);
                 expect(result.status).to.eql(200);
@@ -50,7 +45,7 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                         expect(result1.status).to.eql(200);
                         expect(result1.body).to.have.property('id', cardId1);
                         expect(result1.body).to.have.property('name', dataCard.name.corto);
-                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idBoard', Cypress.env('idboard'));
                         expect(result1.body).to.have.property('idList', listaA);
                         posCard1 = result1.body.pos;
                     })
@@ -71,7 +66,7 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                         expect(result1.body).to.have.property('id', cardId2);
                         expect(result1.body).to.have.property('name', dataCard.name.vacio);
                         expect(result1.body.pos).to.be.greaterThan(posCard1);
-                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idBoard', Cypress.env('idboard'));
                         expect(result1.body).to.have.property('idList', listaA);
                         posCard2 = result1.body.pos;
                     })
@@ -93,7 +88,7 @@ describe('Crear y eliminar tarjetas de un tablero', () => {
                         expect(result1.body).to.have.property('id', cardId3);
                         expect(result1.body).to.have.property('name', dataCard.name.largo);
                         expect(result1.body.pos).to.be.greaterThan(posCard2);
-                        expect(result1.body).to.have.property('idBoard', eQA.IDBOARD);
+                        expect(result1.body).to.have.property('idBoard', Cypress.env('idboard'));
                         expect(result1.body).to.have.property('idList', listaA);
                         posCard3 = result1.body.pos;
                     })
