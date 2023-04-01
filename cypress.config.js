@@ -21,5 +21,6 @@ module.exports = defineConfig({
 
     },
     watchForFileChanges: false,
+    video: false,
   },
 });
