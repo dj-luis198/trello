@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open --e2e -b electron"
+    "test": "npx cypress open --e2e -b electron",
+    "post-test":"npx cypress run --spec cypress/e2e/apiTrello/postCards.cy.js",
+    "put-delete-test":"npx cypress run --spec cypress/e2e/apiTrello/putDeleteCards.cy.js"
   },
   "keywords": [],
   "author": "",
